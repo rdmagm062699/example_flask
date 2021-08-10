@@ -2,3 +2,4 @@ Flask==2.0.1
 behave==1.2.6
 Flask-SQLAlchemy==2.5.1
 mysql-connector-python==8.0.26
+mock==4.0.3
