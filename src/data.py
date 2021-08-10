@@ -8,3 +8,9 @@ def get_all(limit=None):
         return [d for d in all_data if d.data_value.isnumeric()]
     else:
         return all_data
+
+def add(db, data):
+    new_data = Data()
+    new_data.data_value = data['data_value']
+    db.session.add(new_data)
+    db.session.commit()

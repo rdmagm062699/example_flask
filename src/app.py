@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from .models import db, Data
-from .data import get_all
+from .data import get_all, add
 
 app = Flask(__name__)
 db_user = os.getenv("DB_USER")
@@ -21,4 +21,5 @@ def data():
 @app.route('/data', methods=['POST'])
 def blah():
     print(request.json)
-    return ""
+    add(db, request.json)
+    return "Data successfully added"
