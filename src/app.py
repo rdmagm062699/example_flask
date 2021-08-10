@@ -1,6 +1,6 @@
 import os
 from flask import Flask, request, jsonify
-from models import db, Data
+from .models import db, Data
 
 app = Flask(__name__)
 db_user = os.getenv("DB_USER")
@@ -15,6 +15,7 @@ def index():
 @app.route('/data')
 def data():
     all_data = Data.query.all()
+    print(all_data)
     return jsonify(all_data)
 
 @app.route('/data', methods=['POST'])
