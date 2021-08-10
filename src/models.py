@@ -5,6 +5,10 @@ db = SQLAlchemy()
 
 @dataclass
 class Data(db.Model):
+    def __init__(self, id, data_value):
+        self.id = id
+        self.data_value = data_value
+
     id: int
     data_value: str
 

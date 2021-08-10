@@ -15,7 +15,8 @@ def index():
   
 @app.route('/data')
 def data():
-    return jsonify(get_all())
+    limit = request.args.get('limit')
+    return jsonify(get_all(limit))
 
 @app.route('/data', methods=['POST'])
 def blah():
