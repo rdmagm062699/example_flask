@@ -7,9 +7,6 @@ root_dir="${this_dir}/.."
 
 cd $root_dir
 
-pip install --upgrade pip
-pip install -r requirements.txt
-
 docker-compose -f docker-compose-test.yml up -d
 
 echo "Sleeping to allow mysql to start...."

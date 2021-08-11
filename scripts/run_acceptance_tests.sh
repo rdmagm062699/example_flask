@@ -7,6 +7,7 @@ root_dir="${this_dir}/.."
 
 cd $root_dir
 
-./venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
 
 behave
