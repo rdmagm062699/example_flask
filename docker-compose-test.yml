@@ -6,3 +6,15 @@ services:
       stdin_open: true
       volumes:
           - .:/build
+    mysql:
+      container_name: example-flask-mysql
+      image: mysql:latest
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+        DB_PASSWORD: ${DB_PASSWORD}
+      ports: 
+        - "9000:3306"
+      volumes:
+          - .:/build
