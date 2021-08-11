@@ -3,6 +3,7 @@ import mock
 from src.data import get_all
 from src.models import Data
 
+
 class TestData(unittest.TestCase):
 
     @mock.patch('src.data.Data')

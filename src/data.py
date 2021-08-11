@@ -1,4 +1,4 @@
-from .models import Data
+from src.models import Data
 from flask import jsonify
 
 def get_all(limit=None):

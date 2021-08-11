@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, jsonify
-from .models import db, Data
-from .data import get_all, add
+from src.models import db, Data
+from src.data import get_all, add
 
 app = Flask(__name__)
 db_user = os.getenv("DB_USER")
