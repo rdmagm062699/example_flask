@@ -12,6 +12,7 @@ use example;
 create table data
 (
     id          INT unsigned NOT NULL AUTO_INCREMENT,
+    data_value  VARCHAR(150),
     PRIMARY KEY (id)
 );
 EOF
