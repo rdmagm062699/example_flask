@@ -7,7 +7,7 @@ root_dir="${this_dir}/.."
 
 mysql -u root --password=${DB_PASSWORD} -e "create database example"
 
-create_table=$(cat<< EOF
+create_tables=$(cat<< EOF
 use example;
 create table data
 (
@@ -15,7 +15,18 @@ create table data
     data_value  VARCHAR(150),
     PRIMARY KEY (id)
 );
+
+create table other_stuff
+(
+    id          INT unsigned NOT NULL AUTO_INCREMENT,
+    data_id     INT unsigned NOT NULL,
+    column_one  VARCHAR(150),
+    column_two  VARCHAR(150),
+    PRIMARY KEY (id),
+    FOREIGN KEY (data_id)
+        REFERENCES data(id)
+)
 EOF
 )
 
-mysql -u root --password=${DB_PASSWORD} -e "${create_table}"
+mysql -u root --password=${DB_PASSWORD} -e "${create_tables}"
