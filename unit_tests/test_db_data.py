@@ -1,7 +1,7 @@
 import flask_testing
 from src.models import db, Data
 from flask import Flask
-from src.data import get_all
+from src.data import get_all, add
 
 
 class TestDb(flask_testing.TestCase):
@@ -55,3 +55,15 @@ class TestDb(flask_testing.TestCase):
     
         self.assertEqual(get_all('only_numbers'), expected)
 
+    def test_all_creates_specified_data(self):
+        data = {
+            'data_value': '123'
+        }
+
+        expected = [Data(id=1, data_value='123')]
+
+        add(db, data)
+
+        actual = Data.query.all()
+
+        self.assertEqual(actual, expected)
