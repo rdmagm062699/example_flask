@@ -1,0 +1,13 @@
+version: "3"
+services: 
+    example-flask-run-app:
+      container_name: example-flask-run-app
+      image: example-flask-run-app:latest
+      stdin_open: true
+      environment:
+        FLASK_APP: /app/src/app
+        DB_HOST: host.docker.internal
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+      ports:
+        - 5000:5000

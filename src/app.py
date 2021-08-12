@@ -6,7 +6,8 @@ from src.data import get_all, add
 app = Flask(__name__)
 db_user = os.getenv("DB_USER")
 db_password = os.getenv("DB_PASSWORD")
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{db_user}:{db_password}@localhost/example'
+db_host = os.getenv("DB_HOST")
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{db_user}:{db_password}@{db_host}/example'
 db.init_app(app)
 
 @app.route('/')

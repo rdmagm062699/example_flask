@@ -2,7 +2,7 @@ version: "3"
 services: 
     example-flask-run-tests:
       container_name: example-flask-run-tests 
-      image: example-flask:latest
+      image: example-flask-run-tests:latest
       stdin_open: true
       volumes:
           - .:/build
