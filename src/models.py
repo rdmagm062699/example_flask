@@ -10,6 +10,7 @@ class Data(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     data_value = db.Column(db.String(150))
+    other_stuff = db.relationship('OtherStuff', backref='data')
 
 @dataclass
 class OtherStuff(db.Model):
