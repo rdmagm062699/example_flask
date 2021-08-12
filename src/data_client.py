@@ -10,7 +10,6 @@ def get_all_data(limit=None):
         return all_data
 
 def add_data(db, data):
-    new_data = Data()
-    new_data.data_value = data['data_value']
+    new_data = Data(data_value=data['data_value'])
     db.session.add(new_data)
     db.session.commit()
