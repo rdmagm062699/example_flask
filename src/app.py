@@ -15,12 +15,12 @@ def index():
   return 'Server Works!'
   
 @app.route('/v1/data')
-def data():
+def get_data_route():
     limit = request.args.get('limit')
     return jsonify(get_all_data(limit))
 
 @app.route('/v1/data', methods=['POST'])
-def blah():
+def add_data_route():
     print(request.json)
     add_data(db, request.json)
     return "Data successfully added"
