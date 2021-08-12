@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from src.models import db, Data
-from src.data_client import get_all_data, add_data
+from src.data_client import get_all_data, add_data, add_other_stuff
 
 app = Flask(__name__)
 db_user = os.getenv("DB_USER")
@@ -23,3 +23,8 @@ def get_data_route():
 def add_data_route():
     id = add_data(db, request.json)
     return { 'id': id }
+
+@app.route('/v1/data/<int:data_id>/otherstuff', methods=['POST'])
+def add_other_stuff_route(data_id):
+    add_other_stuff(db, data_id, request.json)
+    return ''

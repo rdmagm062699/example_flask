@@ -1,7 +1,7 @@
 import flask_testing
-from src.models import db, Data
+from src.models import db, Data, OtherStuff
 from flask import Flask
-from src.data_client import get_all_data, add_data
+from src.data_client import get_all_data, add_data, add_other_stuff
 
 
 class TestDb(flask_testing.TestCase):
@@ -71,3 +71,23 @@ class TestDb(flask_testing.TestCase):
         id = add_data(db, data)
 
         self.assertEqual(1, id)
+
+    def test_add_other_stuff_add_specfied_data(self):
+        data = {
+            'data_value': '123'
+        }
+
+        data_id = add_data(db, data)
+
+        other_stuff = {
+            'column_one': '1',
+            'column_two': '2'
+        }
+
+        expected = [OtherStuff(id=1, data_id=data_id, column_one='1', column_two='2')]
+
+        add_other_stuff(db, data_id, other_stuff)
+
+        actual = OtherStuff.query.all()
+
+        self.assertEqual(actual, expected)
