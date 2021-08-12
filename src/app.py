@@ -21,6 +21,5 @@ def get_data_route():
 
 @app.route('/v1/data', methods=['POST'])
 def add_data_route():
-    print(request.json)
-    add_data(db, request.json)
-    return "Data successfully added"
+    id = add_data(db, request.json)
+    return { 'id': id }

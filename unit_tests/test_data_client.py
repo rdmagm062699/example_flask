@@ -62,3 +62,12 @@ class TestDb(flask_testing.TestCase):
         actual = Data.query.all()
 
         self.assertEqual(actual, expected)
+
+    def test_add_data_returns_id_of_new_record(self):
+        data = {
+            'data_value': '123'
+        }
+
+        id = add_data(db, data)
+
+        self.assertEqual(1, id)

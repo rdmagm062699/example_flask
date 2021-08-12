@@ -13,3 +13,6 @@ def add_data(db, data):
     new_data = Data(data_value=data['data_value'])
     db.session.add(new_data)
     db.session.commit()
+    db.session.flush()
+
+    return new_data.id
