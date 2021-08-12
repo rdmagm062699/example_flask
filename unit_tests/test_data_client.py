@@ -1,7 +1,7 @@
 import flask_testing
 from src.models import db, Data
 from flask import Flask
-from src.data import get_all, add
+from src.data_client import get_all_data, add_data
 
 
 class TestDb(flask_testing.TestCase):
@@ -21,13 +21,8 @@ class TestDb(flask_testing.TestCase):
         db.session.remove()
         db.drop_all()
 
-    def test_one(self):
-        db.session.add(Data(id=1, data_value='blah'))
-        db.session.commit()
-        self.assertEqual(len(get_all()), 1)
-
-    def test_get_all_returns_empty_list_if_nothing_in_database(self):
-        self.assertEqual(get_all(), [])
+    def test_get_all_data_returns_empty_list_if_nothing_in_database(self):
+        self.assertEqual(get_all_data(), [])
 
     def test_get_all_returns_all_database_data(self):
         test_data = [
@@ -40,9 +35,9 @@ class TestDb(flask_testing.TestCase):
 
         expected = test_data
     
-        self.assertEqual(get_all(), expected)
+        self.assertEqual(get_all_data(), expected)
 
-    def test_get_all_returns_only_numeric_values_if_instructed_to(self):
+    def test_get_all_data_returns_only_numeric_values_if_instructed_to(self):
         test_data = [
             Data(id=1, data_value='blah'),
             Data(id=2, data_value='2'),
@@ -53,16 +48,16 @@ class TestDb(flask_testing.TestCase):
 
         expected = [Data(id=2, data_value='2')]
     
-        self.assertEqual(get_all('only_numbers'), expected)
+        self.assertEqual(get_all_data('only_numbers'), expected)
 
-    def test_all_creates_specified_data(self):
+    def test_add_data_creates_specified_data(self):
         data = {
             'data_value': '123'
         }
 
         expected = [Data(id=1, data_value='123')]
 
-        add(db, data)
+        add_data(db, data)
 
         actual = Data.query.all()
 

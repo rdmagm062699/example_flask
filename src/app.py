@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, jsonify
 from src.models import db, Data
-from src.data import get_all, add
+from src.data_client import get_all_data, add_data
 
 app = Flask(__name__)
 db_user = os.getenv("DB_USER")
@@ -17,10 +17,10 @@ def index():
 @app.route('/data')
 def data():
     limit = request.args.get('limit')
-    return jsonify(get_all(limit))
+    return jsonify(get_all_data(limit))
 
 @app.route('/data', methods=['POST'])
 def blah():
     print(request.json)
-    add(db, request.json)
+    add_data(db, request.json)
     return "Data successfully added"
