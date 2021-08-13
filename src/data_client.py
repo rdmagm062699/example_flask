@@ -21,3 +21,6 @@ def add_other_stuff(db, data_id, stuff):
     other_stuff = OtherStuff(data_id=data_id, column_one=stuff['column_one'], column_two=stuff['column_two'])
     db.session.add(other_stuff)
     db.session.commit()
+
+def get_other_stuff(data_id):
+    return OtherStuff.query.all()

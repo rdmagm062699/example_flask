@@ -1,7 +1,7 @@
 import flask_testing
 from src.models import db, Data, OtherStuff
 from flask import Flask
-from src.data_client import get_all_data, add_data, add_other_stuff
+from src.data_client import get_all_data, add_data, add_other_stuff, get_other_stuff
 
 
 class TestDb(flask_testing.TestCase):
@@ -91,3 +91,25 @@ class TestDb(flask_testing.TestCase):
         actual = OtherStuff.query.all()
 
         self.assertEqual(actual, expected)
+
+    def test_get_other_stuff_returns_expected_data(self):
+        test_data = [
+            Data(id=1, data_value='blah')
+        ]
+
+        db.session.bulk_save_objects(test_data)
+
+        test_other_stuff = [
+            OtherStuff(data_id=1, column_one='blah1', column_two='blahblah1')
+        ]
+
+        db.session.bulk_save_objects(test_other_stuff)
+        db.session.commit()
+
+        expected = [
+            OtherStuff(id=1, data_id=1, column_one='blah1', column_two='blahblah1')
+        ]
+
+        actual = get_other_stuff(1)
+
+        self.assertEqual(actual, expected);
