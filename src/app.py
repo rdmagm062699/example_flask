@@ -10,10 +10,7 @@ db_host = os.getenv("DB_HOST")
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{db_user}:{db_password}@{db_host}/example'
 db.init_app(app)
 
-@app.route('/v1')
-def index():
-  return 'Server Works!'
-  
+
 @app.route('/v1/data')
 def get_data_route():
     limit = request.args.get('limit')
@@ -29,8 +26,6 @@ def add_other_stuff_route(data_id):
     add_other_stuff(db, data_id, request.json)
     return ''
 
-
 @app.route('/v1/data/<int:data_id>/otherstuff')
 def get_other_stuff_route(data_id):
-    get_other_stuff(data_id)
-    return ''
+    return jsonify(get_other_stuff(data_id))
