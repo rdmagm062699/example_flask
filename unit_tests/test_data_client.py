@@ -113,3 +113,29 @@ class TestDb(flask_testing.TestCase):
         actual = get_other_stuff(1)
 
         self.assertEqual(actual, expected);
+
+    def test_get_other_stuff_returns_expected_data_for_specified_data_id(self):
+        test_data = [
+            Data(id=1, data_value='blah'),
+            Data(id=2, data_value='blah')
+        ]
+
+        db.session.bulk_save_objects(test_data)
+
+        test_other_stuff = [
+            OtherStuff(data_id=1, column_one='blah1', column_two='blahblah1'),
+            OtherStuff(data_id=2, column_one='blah2', column_two='blahblah2')
+        ]
+
+        db.session.bulk_save_objects(test_other_stuff)
+        db.session.commit()
+
+        request_data_id = 2
+
+        expected = [
+            OtherStuff(id=2, data_id=2, column_one='blah2', column_two='blahblah2')
+        ]
+
+        actual = get_other_stuff(request_data_id)
+
+        self.assertEqual(actual, expected)

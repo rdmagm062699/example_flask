@@ -23,4 +23,4 @@ def add_other_stuff(db, data_id, stuff):
     db.session.commit()
 
 def get_other_stuff(data_id):
-    return OtherStuff.query.all()
+    return OtherStuff.query.filter_by(data_id=data_id).all()
